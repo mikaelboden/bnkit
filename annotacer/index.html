@@ -1,0 +1,698 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../travis/">
+      
+      
+        <link rel="next" href="../phylotree/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Annotate Ancestral Reconstruction (AnnotAceR) - bnkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#annotate-ancestral-reconstruction-annotacer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="bnkit" class="md-header__button md-logo" aria-label="bnkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bnkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Annotate Ancestral Reconstruction (AnnotAceR)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="bnkit" class="md-nav__button md-logo" aria-label="bnkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    bnkit
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bnkit documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../travis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tracing Ancestors Via Indels and Substitutions (TrAVIS)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Annotate Ancestral Reconstruction (AnnotAceR)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Annotate Ancestral Reconstruction (AnnotAceR)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-annotacer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using AnnotAceR
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phylotree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    phylotree
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../json-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JSON API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-annotacer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using AnnotAceR
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="annotate-ancestral-reconstruction-annotacer">Annotate Ancestral Reconstruction (AnnotAceR)</h1>
+<p>AnnotAceR is a tool to annotate ancestors and extant nodes in a phylogenetic tree by 
+reference to a subset of nodes with known properties. These properties are represented by either 
+discrete or continuous variables. In the latter case, it also uses latent discrete variables 
+to mix (Gaussian) distributions of the observable continuous variables. (The parameters for these
+mixtures are shared between all nodes in the tree; the states at the nodes are governed by an
+evolutionary model.) The use of latent variables is optional for discrete observables.
+AnnotAceR forms part of the GRASP-suite (Foley et al., 2022).</p>
+<h3 id="using-annotacer">Using AnnotAceR</h3>
+<p><code>Usage: asr.AnnotAceR</code></p>
+<pre><code>[-nwk &lt;tree-file&gt; -in {&lt;label&gt;{:&lt;parser&gt;}@}&lt;input-file&gt; -out &lt;output-file&gt;]
+
+{-model &lt;uniform(default)&gt;}
+
+{-gamma &lt;gamma-value(default 1.0)&gt;}
+
+{-params &lt;JSON-file&gt;}
+
+{-latent &lt;#states&gt;}
+
+{-internal}
+
+{-learn}
+
+{-tied}
+
+{-seed &lt;seed&gt;}
+
+{-joint (default) | -marg {&lt;branchpoint-id&gt;}}
+
+{-format &lt;TSV(default), TREE, STDOUT, ITOL&gt;}
+
+{-help|-h}
+
+{-verbose|-v}
+
+where
+tree-file is a phylogenetic tree on Newick format.
+input-file is a table with sequence or ancestor names in the first column, and corresponding values
+(empty or None or null implies not assigned) on TSV format.
+label flags that a header is used in the input-file and identifies the column with values to be modelled;
+if no label is given, headers are assumed absent and values from the second column will be modelled
+parser identifies a parser to use on the column with values (e.g. BRENDA).
+output-file will contain:
+inferred branch point states on specified format (TSV by default, TREE is a labelled tree on Newick format, 
+ITOL is a dataset to decorate trees in iTOL.embl.de).
+gamma-value is parameter to the uniform model (n-state generalisation of Jukes-Cantor).
+JSON-file contains a JSON string specifying the distribution for latent nodes (if latent mode is used).
+latent indicates that the tree consists of latent values only (latent mode), with specified values 
+as extensions to the leaves.
+#states is the number of latent states to learn (should not exceed 25, labelled A-Z).
+internal indicates that internal nodes are also extended with user-specified or learned distributions 
+(default leaves-only).
+learn excludes inference and instead prompts EM learning of parameters, using input data as training data.
+tied implies that the variance learned is the same across the latent states (only applicable when 
+EM-learning GDTs; default is off).
+help prints out commandline arguments (this screen).
+verbose completes the requested steps while printing out messages about the process.
+</code></pre>
+<h3 id="notes">Notes:</h3>
+<p>Evolutionary models of substitution are currently limited to uniform, which is an adaptation of Jukes-Cantor for arbitrary number of states (gamma-value is used by this model).</p>
+<p>If specified values are real, a conditional Gaussian mixture distribution conditioned on latent state is learned.</p>
+<p>If specified values are discrete, a multinomial distribution conditioned on latent state is learned.</p>
+<p>Inference is either joint (default) or marginal (marginal allows a branch-point to be nominated; if one is not given all uninstantiated nodes are inferred).</p>
+<h3 id="examples">Examples</h3>
+<h4 id="example-1">Example 1</h4>
+<p>Here we use a tree <code>ancestors.nwk</code> with extant nodes labelled by their accession IDs and internal, ancestor nodes labelled 
+as per GRASP (N0, N1, etc in a depth first manner). Then we have a tab-separated value file (TSV file) with annotations 
+<code>annotations.txt</code> extracted from various sources; each column has a header (e.g. <code>SUPERKINGDOM</code>) that we reference below.</p>
+<p>We infer the joint labeling (<code>-joint</code>) of external and internal (<code>-internal</code>) nodes most likely to explain the labels in the matching annotation file.</p>
+<p><code>AnnotAceR -nwk ancestors.nwk -in SUPERKINGDOM@annotations.txt -joint -internal -out tst_Taxonomic_lineage_SUPERKINGDOM.txt -format ITOL</code></p>
+<p>Here are 10 lines from <code>annotations.txt</code>:</p>
+<pre><code>Entry   PHYLUM  SUPERKINGDOM    BRENDA_TS_DATA
+A5ILB0  Thermotogae Bacteria    None
+P08144  Arthropoda  Eukaryota   57.7_count=1
+P29957  Proteobacteria  Bacteria    44.1_count=1
+H2N0D4  Chordata    Eukaryota   55_count=1
+T1WDH2  Ciliophora  Eukaryota   40_count=1;50_count=2
+T1WE96  Ciliophora  Eukaryota   40_count=1;50_count=2
+H9B4I9  Firmicutes  Bacteria    62.3_count=2
+A0A060DAC6  None    None    34_count=1;55_count=3
+Q47R94  Actinobacteria  Bacteria    74_count=1
+</code></pre>
+<p>The result is here saved as an iTOL dataset file (<code>-format ITOL</code>), which we drop in the iTOL webtool once the tree file has been uploaded.</p>
+<p><img alt="SUPERKINGDOM.png" src="../images/SUPERKINGDOM.png" /></p>
+<h4 id="example-2">Example 2</h4>
+<p>This example learns distributions for continuous, experimental values, as observed for various ancestral 
+reconstructions across a tree (yes, you can mix extants and ancestors). It then infers continuous values
+for uninstantiated nodes in the tree, including other ancestors and all extants, conditioned on those 
+that are known.</p>
+<p>First, learning the distribution shared by all nodes (external and internal, as turned "on" by the option 
+<code>-internal</code>). The model uses three latent states (<code>-latent 3</code>) for which it invents three discrete values: 
+<code>NADPH_kcat_1</code>, <code>NADPH_kcat_2</code>, ... These are not shown by default in marginal inference, as the method 
+instead opts to sample the continuous distribution many times to arrive at a mean value. </p>
+<p><code>asr.AnnotAceR -nwk kari_ancestors.nwk -in NADPH_kcat@experiments.txt -latent 3 -learn -internal -params params_NADPH_kcat.json -out trn_NADPH_kcat.txt -format ITOL -seed 1 -tied</code></p>
+<p>Experimental values are available for a group of ancestors in <code>experiments.txt</code> (TSV file; note that 
+ancestor names are numbers as generated by GRASP, not including the 'N' prefix). Note also that when no 
+value is available you just leave that cell blank or use a value like <code>null</code>, <code>None</code>:</p>
+<pre><code>Ancestor    NADPH_kcat  NADH_kcat   NADPH_km    NADH_km NADPH_kcat_km   NADH_kcat_km    NADPH_Vmax  NADH_Vmax   NADH_Tm
+615 0.102   0.04    0.106   0.251   0.965   0.158   1.02E-04    3.95E-05    75.0
+459 0.244   0.213   0.06    0.131   4.081   1.627   1.22E-04    1.06E-04
+608 0.854   0.582   0.563   0.854   1.518   0.681   8.54E-04    5.82E-04    100.0
+95  0.474   0.456   0.177   0.217   2.686   2.119   4.74E-04    4.56E-04    90.0
+29  0.028   0.04    0.112   0.074   0.245   0.538   2.75E-04    3.99E-05
+227 0.138   0.083   0.2277  0.1702  0.607   0.546   1.38E-04    9.29E-05    95.0
+79                                  85.0%
+</code></pre>
+<p>Training was done with tied variances as this dataset is extremely sparse (only five values known). 
+The latent-to-continuous value distribution shared between nodes is saved after training as:</p>
+<pre><code>{&quot;Condition&quot;:[[&quot;NADPH_kcat_1&quot;],[&quot;NADPH_kcat_2&quot;],[&quot;NADPH_kcat_3&quot;]],
+&quot;Pr&quot;:[[0.8539999487484222,0.007448424553531107],
+[0.29523664088109924,0.007448424553531107],
+[0.07218627893409603,0.007448424553531107]],
+&quot;Variable&quot;:{&quot;Domain&quot;:{&quot;Predef&quot;:&quot;Real&quot;},&quot;Name&quot;:&quot;0_Real&quot;},&quot;Nodetype&quot;:&quot;GDT&quot;,&quot;TieVariance&quot;:2,&quot;Index&quot;:[0,1,2]}
+</code></pre>
+<p>The training data was saved as an iTOL dataset above and can be dropped into the iTOL webtool 
+and shows up like this. </p>
+<p><img alt="NADPH_kcat_trn.png" src="../images/NADPH_kcat_trn.png" /></p>
+<p>Now, let's run the inference. </p>
+<p><code>asr.AnnotAceR -nwk kari_ancestors.nwk -in NADPH_kcat@experiments.txt -latent 3 -marg -internal -params params_NADPH_kcat.json -out tst_NADPH_kcat.txt -format ITOL -seed 1 -tied</code></p>
+<p>Sampling from Gaussian mixture at each uninstantiated node gives:</p>
+<p><img alt="NADPH_kcat_tst.png" src="../images/NADPH_kcat_tst.png" /></p>
+<p>Change <code>-format TSV</code> gives a file with this "head".</p>
+<pre><code>Ancestor    NADPH_kcat
+N0  0.754645807596001
+N1  0.6482432683741166
+N2  0.6378986978798374
+N3  0.5932161625795987
+N4  0.5734614385345007
+N5  0.5261001211533353
+tr|A0A0A7GET6|A0A0A7GET6_GEOAI  0.4469566331089113
+N6  0.4536806953981594
+N7  0.44623041036501315
+</code></pre>
+<h4 id="example-3">Example 3</h4>
+<p><code>asr.AnnotAceR -nwk ancestors.nwk -in BRENDA_TS_DATA:BRENDA@annotations.txt -learn -tied -latent 3 -internal -params params_BRENDA_TS_DATA.json -out tst_BRENDA_TS_DATA.txt -format ITOL -seed 2</code></p>
+<p>learns a single mixture of Gaussians for the continuous property values in the column <code>BRENDA_TS_DATA</code> extracted by the parser <code>BRENDA</code>. The mixture is saved in a file <code>params_BRENDA_TS_DATA.json</code>; 
+the training data is re-saved for visualisation in iTOL as <code>tst_BRENDA_TS_DATA.txt</code>. Notice that the <code>-tied</code> variance option was used ensuring that the
+variance for each component is the same value, pooled from all the data. This is recommended if the data is sparse.</p>
+<p>The input tree file is on the Newick format with labelled extand and ancestor nodes (N0, ...), the other 
+input file <code>annotations.txt</code> is a TAB-separated value file (TSV), which is partially shown in Example 1 above.</p>
+<p>The Gaussian mixture file looks like this:</p>
+<pre><code>{&quot;Condition&quot;:[[&quot;BRENDA_TS_DATA_1&quot;],[&quot;BRENDA_TS_DATA_2&quot;],[&quot;BRENDA_TS_DATA_3&quot;]],
+&quot;Pr&quot;:[[89.33343935081669,51.919856563088985],
+[60.4077134808605,51.919856563088985],
+[35.758600529629916,51.919856563088985]],
+&quot;Variable&quot;:{&quot;Domain&quot;:{&quot;Predef&quot;:&quot;Real&quot;},&quot;Name&quot;:&quot;0_Real&quot;},&quot;Nodetype&quot;:&quot;GDT&quot;,&quot;TieVariance&quot;:2,&quot;Index&quot;:[0,1,2]}                    
+</code></pre>
+<p>The iTOL file follows the dataset format, so can be dropped into the iTOL webtool after the tree has been uploaded.</p>
+<p><img alt="TS_BRENDA_trn.png" src="../images/TS_BRENDA_trn.png" /></p>
+<p>The inference for all other nodes can be done with the following command, making reference to the Gaussian mixture
+generated above:</p>
+<p><code>asr.AnnotAceR -nwk ancestors.nwk -in BRENDA_TS_DATA:BRENDA@annotations.txt -marg -tied -latent 3 -internal -params params_BRENDA_TS_DATA.json -out trn_BRENDA_TS_DATA.txt -format ITOL -seed 2</code></p>
+<p>The inference generates another file, in this case again on the iTOL format, enabling it to be used as a second dataset
+for visualisation. If you'd like it to be presented as a TSV file, use <code>-format TSV</code>.</p>
+<p>This is the iTOL visual (added ontop of the previous with training data):</p>
+<p><img alt="TS_BRENDA_tst.png" src="../images/TS_BRENDA_tst.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
